@@ -31,6 +31,9 @@ private:
 	JoystickButton* m_rightButton9;
 	JoystickButton* m_rightButton10;
 	JoystickButton* m_rightButton11;
+	JoystickButton* m_leftButton3;
+	JoystickButton* m_leftButton4;
+	JoystickButton* m_leftButton5;
 	JoystickButton* m_leftButton7;
 	JoystickButton* m_leftButton8;
 	JoystickButton* m_leftButton9;

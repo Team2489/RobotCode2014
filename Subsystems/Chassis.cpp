@@ -10,11 +10,15 @@
 #include "Chassis.h"
 #include "../Robotmap.h"
 #include "../Commands/DriveWithJoysticks.h"
+#include <math.h>
 Chassis::Chassis() : Subsystem("Chassis") {
 	m_gyro = new Gyro(MODULE1NUM, CHASSISGYROANALOG);
 	m_gyro->SetSensitivity(1.25);
 	m_leftMotor = new Talon(MODULE1NUM, CHASSISLEFTMOTORPWM);
 	m_rightMotor =  new Talon(MODULE1NUM, CHASSISRIGHTMOTORPWM);
+	m_shiftUpSolenoid = new Solenoid(MODULE1NUM, UPSOLENOID);
+	m_shiftDownSolenoid = new Solenoid(MODULE1NUM, DOWNSOLENOID);
+	isUp = true; //we are assuming defualt is up. Later make sure 
 #ifdef	TESTERBOT
 	chassisDrive->SetInvertedMotor(RobotDrive::kRearLeftMotor, true);
 	chassisDrive->SetInvertedMotor(RobotDrive::kRearRightMotor, true);       
@@ -39,6 +43,15 @@ void Chassis::driveWithJoysticks(float rightstick, float leftstick) {
 #ifdef TESTERBOT
 	drive->TankDrive( leftstick, rightstick);
 #else
+	if(fabs(rightstick) < 0.05){
+		rightstick = 0;
+	}
+	if(fabs(leftstick) < 0.05){
+		leftstick = 0;
+	}
+	if(rightstick != 0 || leftstick != 0){
+		cout << "Right " << rightstick << " Left " << leftstick << endl;
+	}
 	drive->TankDrive( rightstick, leftstick);
 #endif
 }
@@ -67,4 +80,41 @@ void Chassis::getAccel(){
 	cout << " x1: " << tempx << " ";
 	cout << " y2: " << tempy << " ";
 	cout << " z1: " << tempz << " ";
+}
+
+void Chassis::__shiftUp(){
+	m_shiftUpSolenoid->Set(true);
+	m_shiftDownSolenoid->Set(false);
+	isUp = true;
+//	cout << "going up" << endl;
+}
+
+void Chassis::__shiftDown(){
+	m_shiftUpSolenoid->Set(false);
+	m_shiftDownSolenoid->Set(true);
+	isUp = false;
+//	cout << "going down" << endl;
+}
+
+
+void Chassis::shiftUp(){
+	if(isUp == false){
+		__shiftUp();
+	}
+}
+
+void Chassis::shiftDown(){
+	if(isUp){
+		__shiftDown();
+	}
+}
+
+void Chassis::switchGear(){
+	if(isUp){
+		__shiftDown();
+	}
+	else{
+		__shiftUp();
+		
+	}
 }
