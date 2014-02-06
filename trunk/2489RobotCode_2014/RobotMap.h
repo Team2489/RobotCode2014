@@ -25,6 +25,8 @@
 
 //Solenoids
 #define PUMPSPIKESOLENOID 8
+#define UPSOLENOID 1
+#define DOWNSOLENOID 2
 
 //Analog 
 #define CHASSISGYROANALOG 1
