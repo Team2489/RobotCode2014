@@ -27,6 +27,7 @@
 #include "Commands/ShiftDown.h"
 #include "Commands/ShiftGear.h"
 #include "Commands/ShiftUp.h"
+#include "Commands/DriveDistanceCommand.h"
 const double OI::PotRange = 3.2;
 OI::OI() {
 	// Process operator interface input here.
@@ -95,6 +96,9 @@ OI::OI() {
 	m_leftButton3->WhenPressed(new ShiftGear());
 	m_leftButton4->WhenPressed(new ShiftDown());
 	m_leftButton5->WhenPressed(new ShiftUp());
+	
+	//Testing only: Drive forward 10 inches at 0.5 power level
+	m_leftButton6->WhenPressed(new DriveDistanceCommand(200, 0.5)); 
 }
 
 Joystick* OI::getm_leftStick() {

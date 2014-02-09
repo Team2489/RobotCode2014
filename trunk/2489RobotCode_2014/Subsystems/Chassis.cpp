@@ -11,17 +11,30 @@
 #include "../Robotmap.h"
 #include "../Commands/DriveWithJoysticks.h"
 #include <math.h>
+
+
 Chassis::Chassis() : Subsystem("Chassis") {
 	m_gyro = new Gyro(MODULE1NUM, CHASSISGYROANALOG);
 	m_gyro->SetSensitivity(1.25);
+#ifdef TESTERBOT	
+	m_leftMotor = new Jaguar(MODULE1NUM, CHASSISLEFTMOTORPWM);
+	m_rightMotor =  new Jaguar(MODULE1NUM, CHASSISRIGHTMOTORPWM);
+#else	
 	m_leftMotor = new Talon(MODULE1NUM, CHASSISLEFTMOTORPWM);
 	m_rightMotor =  new Talon(MODULE1NUM, CHASSISRIGHTMOTORPWM);
+#endif //#ifdef DEMO_BOT
+	
 	m_shiftUpSolenoid = new Solenoid(MODULE1NUM, UPSOLENOID);
 	m_shiftDownSolenoid = new Solenoid(MODULE1NUM, DOWNSOLENOID);
 	isUp = true; //we are assuming defualt is up. Later make sure 
+	m_encoderRight = new Encoder(CHASSIS_ENCODER_RIGHT_PORT_1, CHASSIS_ENCODER_RIGHT_PORT_2);
+	m_encoderLeft = new Encoder(CHASSIS_ENCODER_LEFT_PORT_1, CHASSIS_ENCODER_LEFT_PORT_2);
+	
 #ifdef	TESTERBOT
-	chassisDrive->SetInvertedMotor(RobotDrive::kRearLeftMotor, true);
-	chassisDrive->SetInvertedMotor(RobotDrive::kRearRightMotor, true);       
+	//it does not compile with the following two lines
+	//commenting it out till it is fixed
+//	chassisDrive->SetInvertedMotor(RobotDrive::kRearLeftMotor, true);
+//	chassisDrive->SetInvertedMotor(RobotDrive::kRearRightMotor, true);       
 #endif
 	drive = new RobotDrive(m_leftMotor, m_rightMotor);
 	drive->SetSafetyEnabled(false);
@@ -30,6 +43,18 @@ Chassis::Chassis() : Subsystem("Chassis") {
 	        drive->SetMaxOutput(1.0);
 	        
 	m_accelrometer = new ADXL345_2489(MODULE1NUM,  0xA6);
+}
+
+Chassis::~Chassis() {
+	if(m_gyro != NULL) { delete(m_gyro); }
+	if(m_leftMotor != NULL) { delete(m_leftMotor); }
+	if(m_rightMotor != NULL) { delete(m_rightMotor); }
+	if(drive != NULL) {delete(drive); }
+	if(m_shiftUpSolenoid != NULL) {delete(m_shiftUpSolenoid); }	
+	if(m_shiftDownSolenoid != NULL) {delete(m_shiftDownSolenoid); }	
+	if(m_encoderRight != NULL) {delete(m_encoderRight); }
+	if(m_encoderLeft != NULL) {delete(m_encoderLeft); }
+	if(m_accelrometer != NULL) {delete(m_accelrometer); }
 }
     
 void Chassis::InitDefaultCommand() {
@@ -55,11 +80,11 @@ void Chassis::driveWithJoysticks(float rightstick, float leftstick) {
 }
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
-void Chassis::goStraight(){
-	drive->TankDrive(1.0*CommandBase::oi->getCrouch(), 1.0*CommandBase::oi->getCrouch());
+void Chassis::goStraight(float power){
+	drive->TankDrive(power*CommandBase::oi->getCrouch(), power*CommandBase::oi->getCrouch());
 }
-void Chassis::goBack(){
-	drive->TankDrive(-1.0*CommandBase::oi->getCrouch(), -1.0*CommandBase::oi->getCrouch());
+void Chassis::goBack(float power){
+	drive->TankDrive(-power*CommandBase::oi->getCrouch(), -power*CommandBase::oi->getCrouch());
 }
 void Chassis::stop(){
 	drive->TankDrive(0*CommandBase::oi->getCrouch(), 0*CommandBase::oi->getCrouch());
