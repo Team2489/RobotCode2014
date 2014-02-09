@@ -10,6 +10,10 @@
 #ifndef ROBOTMAP_H
 #define ROBOTMAP_H
 #include "WPILib.h"
+
+//Do not commit it defined, for testbot only
+#define TESTERBOT 1
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -28,6 +32,15 @@
 #define UPSOLENOID 3
 #define DOWNSOLENOID 2
 
+//Encoders
+#define CHASSIS_ENCODER_RIGHT_PORT_1 	13
+#define CHASSIS_ENCODER_RIGHT_PORT_2 	14
+#define CHASSIS_ENCODER_LEFT_PORT_1  	11
+#define CHASSIS_ENCODER_LEFT_PORT_2  	12
+
+// THis value was measured by driving the robot for 100".  
+#define ENCODER_PULSE_PER_INCH			29.20
+
 //Analog 
 #define CHASSISGYROANALOG 1
 
@@ -39,7 +52,7 @@
 #define TESTINGSPEED 0.3
 
 
-//#define TESTERBOT 1
+
 #ifdef TESTERBOT
 #define TURNANGLETOLERENCE 0.001
 #define TURNANGLEDELTA 0.005

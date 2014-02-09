@@ -32,12 +32,16 @@ public:
 	Solenoid* m_shiftUpSolenoid;
 	Solenoid* m_shiftDownSolenoid;
 	bool isUp; 
-	ADXL345_2489 *m_accelrometer;
-	Chassis();
+	Encoder* m_encoderRight;
+	Encoder* m_encoderLeft;
+	ADXL345_2489* m_accelrometer;
+	Chassis(); 
+	virtual ~Chassis();
+	
 	void InitDefaultCommand();
 	void driveWithJoysticks(float, float);
-	void goStraight();
-	void goBack();
+	void goStraight(float power = 1.0);
+	void goBack(float power = 1.0);
 	void stop();
 	void turnLeft();
 	void turnRight();
