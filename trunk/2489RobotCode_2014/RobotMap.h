@@ -24,8 +24,8 @@
 #define CATAPULTMOTOR1PWM 3
 
 //Solenoids
-#define PUMPSPIKESOLENOID 8
-#define UPSOLENOID 1
+#define PUMPSPIKESOLENOID 1
+#define UPSOLENOID 3
 #define DOWNSOLENOID 2
 
 //Analog 
