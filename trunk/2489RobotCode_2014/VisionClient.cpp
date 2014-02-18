@@ -17,10 +17,8 @@ void VisionClient::MainLoop(void *ptr)
 
 void VisionClient::Run(void)
 {
-	double va;
-	double ha;
 	double d;
-	double s;
+	int dstate;
 	int r;
 
 	if (debug) {
@@ -49,18 +47,14 @@ void VisionClient::Run(void)
 		}
 		
 		r = direc.status;
-		va = direc.vert_angle;
-	    ha = direc.horiz_angle;
 	    d = direc.dist;
-	    s = direc.shooter_speed;
+	    dstate = direc.dynamic_on;
 
-	    UpdateState(r, va, ha, d, s);
+	    UpdateState(r, d, dstate);
 	    if (debug) {
 	    	cout  << "Run r = " << r << endl;
 	    	cout  << "Run d = " << d << endl;
-	    	cout  << "Run s = " << s << endl;
-	    	cout  << "Run va = " << va << endl;
-	    	cout  << "Run ha = " << ha << endl;
+	    	cout  << "Run dstate = " << dstate << endl;
 	    }
 		Wait(0.1);
 	}
@@ -97,24 +91,21 @@ VisionClient::VisionClient(void)
 }
 
 
-void VisionClient::UpdateState(int r, double ha, double va, double d, double s)
-{
+void VisionClient::UpdateState(int r,  double d, int dstate){
 	if (debug) {
 		cout << "VisionClient::UpdateState" << endl;
 	}
 	semTake(m_semaphore, WAIT_FOREVER);
 	{
 		// really quick - just update our state
-		m_horizontalAngle = ha;
-		m_verticalAngle = va;
 		m_distance = d;
-		m_shooter_speed = s / 1000.0;
+		m_dynamic_on = dstate;
 		m_retval = r;
 	}
 	semGive(m_semaphore);
 }
 
-int VisionClient::GetState(double *ha, double *va, double *d, double *s)
+int VisionClient::GetState( double *d, int *dstate)
 {
 	if (debug) {
 		cout << "VisionClient::GetState" << endl;
@@ -123,17 +114,14 @@ int VisionClient::GetState(double *ha, double *va, double *d, double *s)
 	semTake(m_semaphore, WAIT_FOREVER);
 	{
 		// really quick - just get our state
-		*ha = m_horizontalAngle;
-		*va = m_verticalAngle;
 		*d = m_distance;
-		*s = m_shooter_speed;
+		*dstate = m_dynamic_on;
 		ret = m_retval;
 	}
 	semGive(m_semaphore);
 	if (debug) {
-		cout  << "getstate *ha = " << *ha << endl;
-		cout  << "getstate *va = " << *va << endl;
 		cout  << "getstate *d = " << *d << endl;
+		cout << "getstate *dstate = " << *dstate << endl;
 		cout  << "getstate ret = " << ret << endl;
 	}
 	return ret;

@@ -17,10 +17,8 @@
 
 //16 bytes
 typedef struct directions{
-    int horiz_angle;
-    int vert_angle;
     int dist;
-    int shooter_speed;
+    int dynamic_on;
     int status;
 };
 

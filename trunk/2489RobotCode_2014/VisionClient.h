@@ -11,11 +11,11 @@ public:
 	virtual ~VisionClient();
 	void Stop();
 	void Start();
-	int GetState(double *ha, double *va, double *d, double *s);
+	int GetState(double *d, int *dynamic_on);
 
 private:
 	void Run();
-	void UpdateState(int r, double ha, double va, double d, double s);
+	void UpdateState(int r,  double d, int dstate);
 	static void MainLoop(void *);
 	
 	TCPClient *client;
@@ -25,10 +25,8 @@ private:
 	SEM_ID m_semaphore; // synchronize access
 
 	// VisionClient last retrieved state
-	double m_horizontalAngle;
-	double m_verticalAngle;
 	double m_distance;
-	double m_shooter_speed;
+	int m_dynamic_on;
 
 	int m_retval; // status of last state retrieval; 0 - success
 };
