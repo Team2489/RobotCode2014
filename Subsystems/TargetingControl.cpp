@@ -25,11 +25,9 @@ void TargetingControl::InitDefaultCommand() {
 double TargetingControl::getDistance() {
 	// Set the default command for a subsystem here.
 	//SetDefaultCommand(new MySpecialCommand());
-	double ha;
-	double va;
 	double d;
-	double s;
-	vc->GetState(&ha, &va, &d, &s);
+	int dstate;
+	vc->GetState(&d, &dstate);
     cout  << "targetting d = " << d << endl;
 	return d;
 }

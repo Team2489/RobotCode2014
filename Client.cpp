@@ -69,10 +69,8 @@ int TCPClient::Receive(directions *direc){
     }
 
     //Convert from network to host byte order
-    replyTemp.vert_angle = ntohl(replyTemp.vert_angle);
-    replyTemp.horiz_angle = ntohl(replyTemp.horiz_angle);
     replyTemp.dist = ntohl(replyTemp.dist);
-    replyTemp.shooter_speed = ntohl(replyTemp.shooter_speed);
+    replyTemp.dynamic_on = ntohl(replyTemp.dynamic_on);
     replyTemp.status = ntohl(replyTemp.status);
     if (debug) {
         cout << "Status is " << replyTemp.status << endl;

@@ -22,7 +22,6 @@
 #include "Commands/TurnAngle.h"
 #include "Commands/TurnLeft.h"
 #include "Commands/TurnRight.h"
-#include "Commands/TurnWithVision.h"
 #include "Commands/RunCatapultTest.h"
 #include "Commands/ShiftDown.h"
 #include "Commands/ShiftGear.h"
@@ -80,7 +79,6 @@ OI::OI() {
 	
 	//assign events to buttons
 //	m_rightButton2->WhenPressed(new Autonomous1());
-	m_rightButton3->WhenPressed(new TurnWithVision());
 	m_rightButton4->WhenPressed(new TurnAngle(-45.0, TURNANGLETOLERENCE, TURNANGLEDELTA, TURNANGLEZONE, COMPENSATION, 2));
 	m_rightButton5->WhenPressed(new TurnAngle(45.0, TURNANGLETOLERENCE, TURNANGLEDELTA, TURNANGLEZONE, COMPENSATION, 2));
 	m_leftTrigger->WhenPressed(new DriveWithJoysticks());
@@ -162,10 +160,15 @@ float OI::getCatapultSpeed(){
 
 
 void OI::printTargeting(){
-	double d, ha, va, s;
-	int ret = CommandBase::targetingControl->vc->GetState(&ha, &va, &d, &s);
+	double d;
+	int dstate;
+	int ret = CommandBase::targetingControl->vc->GetState(&d, &dstate);
 	if (ret == 0){
-		screen->PrintfLine(DriverStationLCD::kUser_Line1, "HA:%3d, VA:%3d, D:%3d", (int) ha, (int) va, (int)d);
+		if(dstate){
+			screen->PrintfLine(DriverStationLCD::kUser_Line1,"Dynamic is on");
+		}else{
+			screen->PrintfLine(DriverStationLCD::kUser_Line1,"Dynamic is off");
+		}
 	}
 	else{
 		screen->PrintfLine(DriverStationLCD::kUser_Line1, "Nothing, ret = %d", ret);
