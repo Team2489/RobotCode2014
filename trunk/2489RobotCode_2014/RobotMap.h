@@ -12,7 +12,7 @@
 #include "WPILib.h"
 
 //Do not commit it defined, for testbot only
-#define TESTERBOT 1
+//#define TESTERBOT 1
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -24,8 +24,16 @@
 // Jaguars Talons and Motors
 #define CHASSISLEFTMOTORPWM 2
 #define CHASSISRIGHTMOTORPWM 1
-#define CATAPULTMOTOR2PWM 4
-#define CATAPULTMOTOR1PWM 3
+
+//Catapult
+#define CATAPULT_MOTOR_1_PWM 5
+#define CATAPULT_MOTOR_2_PWM 6
+#define CATAPULT_MOTOR_3_PWM 7
+#define CATAPULT_SENSOR_IO   14
+
+#define SHOOT_FOR_THE_GOAL_POWER 	0.75
+#define SHOOT_FOR_THE_GOAL_DURATION 0.40
+#define CATAPULT_RESET_POWER		0.2
 
 //Solenoids
 #define PUMPSPIKESOLENOID 1

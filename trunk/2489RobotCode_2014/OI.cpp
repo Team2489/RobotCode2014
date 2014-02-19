@@ -27,6 +27,9 @@
 #include "Commands/ShiftGear.h"
 #include "Commands/ShiftUp.h"
 #include "Commands/DriveDistanceCommand.h"
+#include "Commands/ReleaseCatapultCommand.h"
+#include "Commands/ResetCatapultCommand.h"
+#include "Commands/ShootBallIntoGoalGroup.h"
 const double OI::PotRange = 3.2;
 OI::OI() {
 	// Process operator interface input here.
@@ -78,25 +81,28 @@ OI::OI() {
 	m_gameButton8 = new JoystickButton(m_gameStick, 8);
 	
 	//assign events to buttons
+//	m_rightTrigger->WhileHeld(new RunCatapultTest(0, 0));
+	m_rightTrigger->WhenPressed(new ShootBallIntoGoalGroup());
 //	m_rightButton2->WhenPressed(new Autonomous1());
 	m_rightButton4->WhenPressed(new TurnAngle(-45.0, TURNANGLETOLERENCE, TURNANGLEDELTA, TURNANGLEZONE, COMPENSATION, 2));
 	m_rightButton5->WhenPressed(new TurnAngle(45.0, TURNANGLETOLERENCE, TURNANGLEDELTA, TURNANGLEZONE, COMPENSATION, 2));
-	m_leftTrigger->WhenPressed(new DriveWithJoysticks());
+//	m_rightButton6->WhenPressed(new RunCatapultTest(0, 0.2));
+//	m_rightButton7->WhenPressed(new RunCatapultTest(0, 0.4));
 	m_rightButton8->WhenPressed(new LightControl(true));
 	m_rightButton9->WhenPressed(new LightControl(false));
+//	m_rightButton10->WhenPressed(new RunCatapultTest(0, 0.7));
 //	m_rightButton11->WhenPressed(new RetractPiston());
-	m_rightTrigger->WhileHeld(new RunCatapultTest(0, 0));
-	m_rightButton6->WhenPressed(new RunCatapultTest(0, 0.2));
-	m_rightButton7->WhenPressed(new RunCatapultTest(0, 0.4));
-	m_rightButton10->WhenPressed(new RunCatapultTest(0, 0.7));
-	m_rightButton11->WhenPressed(new RunCatapultTest(0, 1));
+//	m_rightButton11->WhenPressed(new RunCatapultTest(0, 1));
 	
+	m_leftTrigger->WhenPressed(new DriveWithJoysticks());
 	m_leftButton3->WhenPressed(new ShiftGear());
 	m_leftButton4->WhenPressed(new ShiftDown());
 	m_leftButton5->WhenPressed(new ShiftUp());
+	m_leftButton6->WhenPressed(new ReleaseCatapultCommand(0.4, 0.55));
 	
 	//Testing only: Drive forward 10 inches at 0.5 power level
-	m_leftButton6->WhenPressed(new DriveDistanceCommand(200, 0.5)); 
+	m_leftButton7->WhenPressed(new DriveDistanceCommand(200, 0.5)); 
+	m_leftButton8->WhenPressed(new ResetCatapultCommand);
 }
 
 Joystick* OI::getm_leftStick() {
