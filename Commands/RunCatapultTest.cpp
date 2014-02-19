@@ -21,10 +21,10 @@ void RunCatapultTest::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void RunCatapultTest::Execute() {
 	if(m_speed){
-		catapult->RunCatapultMotors(m_speed, m_speed);
+		catapult->RunCatapultMotors(m_speed);
 	}
 	else{
-		catapult->RunCatapultMotors(oi->getCatapultSpeed(), oi->getCatapultSpeed());
+		catapult->RunCatapultMotors(oi->getCatapultSpeed());
 	}
 }
 
@@ -38,7 +38,7 @@ bool RunCatapultTest::IsFinished() {
 
 // Called once after isFinished returns true
 void RunCatapultTest::End() {
-	catapult->RunCatapultMotors(0, 0);
+	catapult->RunCatapultMotors(0);
 	
 }
 
