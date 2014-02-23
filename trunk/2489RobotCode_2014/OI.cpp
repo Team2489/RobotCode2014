@@ -31,7 +31,9 @@
 #include "Commands/ResetCatapultCommand.h"
 #include "Commands/ShootBallIntoGoalGroup.h"
 const double OI::PotRange = 3.2;
-OI::OI() {
+OI::OI():
+		m_EasyButton(1)
+{
 	// Process operator interface input here.
 	m_leftStick = new Joystick(2);
 	m_rightStick = new Joystick(1);
@@ -103,6 +105,8 @@ OI::OI() {
 	//Testing only: Drive forward 10 inches at 0.5 power level
 	m_leftButton7->WhenPressed(new DriveDistanceCommand(200, 0.5)); 
 	m_leftButton8->WhenPressed(new ResetCatapultCommand);
+	
+	m_EasyButton.WhenPressed(new ShootBallIntoGoalGroup());
 }
 
 Joystick* OI::getm_leftStick() {
@@ -114,10 +118,16 @@ Joystick* OI::getm_rightStick() {
 float OI::getCrouch(){
 	float crouch;
 	crouch = m_rightStick->GetZ();
-	crouch = 1-crouch;
+	crouch = 1-crouch;	
 	crouch = crouch/2;
 	return crouch;
 }
+
+bool OI::getReverseDirection() {
+	return (DriverStation::GetInstance()->GetEnhancedIO().GetDigital(12) == 1);
+}
+
+
 void OI::printCrouch(){
 	double crouch = getCrouch();
 	screen->PrintfLine(DriverStationLCD::kUser_Line1, "Crouch: %f", crouch);
