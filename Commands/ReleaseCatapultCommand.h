@@ -2,8 +2,7 @@
 #define RELEASECATAPULTCOMMAND_H
 
 #include "../CommandBase.h"
-
-
+//Uses sensors 
 /**
  *
  *

@@ -15,6 +15,7 @@ Chassis* CommandBase::chassis = NULL;
 Pump* CommandBase::pump = 0;
 TargetingControl* CommandBase::targetingControl = 0;
 Catapult* CommandBase::catapult = 0;
+CrouchIndicator* CommandBase::crouchIndicator = NULL;
 
 void CommandBase::init() {
 	
@@ -24,4 +25,5 @@ void CommandBase::init() {
 	targetingControl = new TargetingControl();
 	catapult = new Catapult();
 	oi = new OI();
+	crouchIndicator = new CrouchIndicator();
 }

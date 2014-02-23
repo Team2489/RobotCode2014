@@ -46,6 +46,7 @@ private:
 	JoystickButton* m_gameButton7;
 	JoystickButton* m_gameButton8;
 	DriverStationEnhancedIO* m_enhancedIO;
+	DigitalIOButton m_EasyButton;
 public:
 	enum AutonomousVariant {
 		AV_2 = 2,
@@ -63,11 +64,12 @@ public:
 	float getCrouch();
 	AutonomousVariant getAutonomousVariant();
 	float getCatapultSpeed();
+	bool getReverseDirection();
 	void printCrouch();
 	void printAngle();
 	void printVariant();
 	void printCatapultSpeed();
-	void OI::printTargeting();
+	void printTargeting();
 	void UpdateScreen();
 	
 };

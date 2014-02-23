@@ -7,7 +7,7 @@
 #include "Subsystems/Pump.h"
 #include "Subsystems/TargetingControl.h"
 #include "Subsystems/Catapult.h"
-
+#include "Subsystems/CrouchIndicator.h"
 
 
 /**
@@ -27,6 +27,7 @@ public:
 	static Pump* pump;
 	static TargetingControl* targetingControl;
 	static Catapult* catapult;
+	static CrouchIndicator* crouchIndicator;
 };
 
 #endif
