@@ -37,14 +37,14 @@
 
 //Solenoids
 #define PUMPSPIKESOLENOID 1
-#define UPSOLENOID 3
+#define UPSOLENOID 1
 #define DOWNSOLENOID 2
 
 //Encoders
-#define CHASSIS_ENCODER_RIGHT_PORT_1 	13
-#define CHASSIS_ENCODER_RIGHT_PORT_2 	14
-#define CHASSIS_ENCODER_LEFT_PORT_1  	11
-#define CHASSIS_ENCODER_LEFT_PORT_2  	12
+#define CHASSIS_ENCODER_RIGHT_PORT_1 	2
+#define CHASSIS_ENCODER_RIGHT_PORT_2 	3
+#define CHASSIS_ENCODER_LEFT_PORT_1  	4
+#define CHASSIS_ENCODER_LEFT_PORT_2  	5
 
 // THis value was measured by driving the robot for 100".  
 #define ENCODER_PULSE_PER_INCH			29.20
@@ -59,7 +59,11 @@
 //Abstract
 #define TESTINGSPEED 0.3
 
-
+//Intake Solenoid
+#define INTAKE_SOLENOID1_RIGHT_PORT 4
+#define INTAKE_SOLENOID1_LEFT_PORT 5
+//Intake Jaguar
+#define INTAKE_JAGUAR_PWM 8
 
 #ifdef TESTERBOT
 #define TURNANGLETOLERENCE 0.001

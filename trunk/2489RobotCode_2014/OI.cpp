@@ -27,6 +27,9 @@
 #include "Commands/ShiftGear.h"
 #include "Commands/ShiftUp.h"
 #include "Commands/DriveDistanceCommand.h"
+#include "Commands/IntakeForwardBack.h"
+#include "Commands/IntakeUpDown.h"
+#include "Commands/RobotStay.h"
 #include "Commands/ReleaseCatapultCommand.h"
 #include "Commands/ResetCatapultCommand.h"
 #include "Commands/ShootBallIntoGoalGroup.h"
@@ -72,6 +75,16 @@ OI::OI():
 	m_leftButton8 = new JoystickButton(m_leftStick, 8);
 	m_leftButton9 = new JoystickButton(m_leftStick, 9);
 	m_leftButton10 = new JoystickButton(m_leftStick, 10);
+	/*
+	 *  1 -- X
+		2 -- A
+		3 -- B
+		4 -- Y
+		5 -- LB
+		6 -- RB
+	 	7 -- LT
+		8 -- RT
+	 */
 	
 	m_gameButton1 = new JoystickButton(m_gameStick, 1);
 	m_gameButton2 = new JoystickButton(m_gameStick, 2);
@@ -92,6 +105,10 @@ OI::OI():
 //	m_rightButton7->WhenPressed(new RunCatapultTest(0, 0.4));
 	m_rightButton8->WhenPressed(new LightControl(true));
 	m_rightButton9->WhenPressed(new LightControl(false));
+	m_gameButton5->WhileHeld(new IntakeForwardBack(false, 0.2));
+	m_gameButton7->WhileHeld(new IntakeForwardBack(true, 0.2));
+	m_gameButton6->WhenPressed(new IntakeUpDown(true));
+	m_gameButton8->WhenPressed(new IntakeUpDown(false));
 //	m_rightButton10->WhenPressed(new RunCatapultTest(0, 0.7));
 //	m_rightButton11->WhenPressed(new RetractPiston());
 //	m_rightButton11->WhenPressed(new RunCatapultTest(0, 1));
@@ -100,6 +117,7 @@ OI::OI():
 	m_leftButton3->WhenPressed(new ShiftGear());
 	m_leftButton4->WhenPressed(new ShiftDown());
 	m_leftButton5->WhenPressed(new ShiftUp());
+	m_leftButton7->WhenPressed(new RobotStay(5.0));
 	m_leftButton6->WhenPressed(new ReleaseCatapultCommand(0.4, 0.55));
 	
 	//Testing only: Drive forward 10 inches at 0.5 power level
@@ -108,7 +126,7 @@ OI::OI():
 	
 	m_EasyButton.WhenPressed(new ShootBallIntoGoalGroup());
 }
-
+ 
 Joystick* OI::getm_leftStick() {
 	return m_leftStick;
 }

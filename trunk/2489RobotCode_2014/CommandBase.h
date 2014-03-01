@@ -7,6 +7,7 @@
 #include "Subsystems/Pump.h"
 #include "Subsystems/TargetingControl.h"
 #include "Subsystems/Catapult.h"
+#include "Subsystems/Intake.h"
 #include "Subsystems/CrouchIndicator.h"
 
 
@@ -24,6 +25,7 @@ public:
 	// Create a single static instance of all of your subsystems
 	static OI *oi;
 	static Chassis* chassis;
+	static Intake* intake;
 	static Pump* pump;
 	static TargetingControl* targetingControl;
 	static Catapult* catapult;

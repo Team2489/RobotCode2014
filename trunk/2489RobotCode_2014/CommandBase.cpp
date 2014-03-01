@@ -12,15 +12,15 @@ CommandBase::CommandBase() : Command() {
 
 OI* CommandBase::oi = NULL;
 Chassis* CommandBase::chassis = NULL;
+Intake* CommandBase::intake = NULL;
 Pump* CommandBase::pump = 0;
 TargetingControl* CommandBase::targetingControl = 0;
 Catapult* CommandBase::catapult = 0;
 CrouchIndicator* CommandBase::crouchIndicator = NULL;
 
 void CommandBase::init() {
-	
-
-	chassis = new Chassis();;
+	chassis = new Chassis();
+	intake = new Intake();
 	pump = new Pump();
 	targetingControl = new TargetingControl();
 	catapult = new Catapult();
