@@ -29,6 +29,22 @@ Chassis::Chassis() : Subsystem("Chassis") {
 	isUp = true; //we are assuming defualt is up. Later make sure 
 	m_encoderRight = new Encoder(CHASSIS_ENCODER_RIGHT_PORT_1, CHASSIS_ENCODER_RIGHT_PORT_2);
 	m_encoderLeft = new Encoder(CHASSIS_ENCODER_LEFT_PORT_1, CHASSIS_ENCODER_LEFT_PORT_2);
+	m_encoderRight->Start();
+	m_encoderLeft->Start();
+	m_PIDController1 = new PIDController(0.01, 0, 0, m_encoderLeft, m_leftMotor);
+	m_PIDController2 = new PIDController(0.01, 0, 0, m_encoderRight, m_rightMotor);
+	
+	m_PIDController1->SetContinuous(true);
+	m_PIDController1->SetOutputRange(-1,1);
+	m_PIDController1->SetTolerance(3);
+	m_PIDController1->SetSetpoint(0);
+	m_PIDController1->Disable();
+			
+	m_PIDController2->SetContinuous(true);
+	m_PIDController2->SetOutputRange(-1,1);
+	m_PIDController2->SetTolerance(3);
+	m_PIDController2->SetSetpoint(0);
+	m_PIDController2->Disable();
 	
 #ifdef	TESTERBOT
 	//it does not compile with the following two lines
@@ -64,7 +80,7 @@ void Chassis::InitDefaultCommand() {
 }
 void Chassis::driveWithJoysticks(float rightstick, float leftstick) {
 #ifdef TESTERBOT
-	drive->TankDrive( leftstick, rightstick);
+	drive->TankDrive(leftstick, rightstick);
 #else
 	if(fabs(rightstick) < 0.05){
 		rightstick = 0;
@@ -140,4 +156,26 @@ void Chassis::switchGear(){
 		__shiftUp();
 		
 	}
+}
+
+void Chassis::stopMotion() {
+	m_PIDController1->SetSetpoint(m_encoderLeft->GetDistance());
+	m_PIDController2->SetSetpoint(m_encoderRight->GetDistance());
+	m_PIDController1->Enable();
+	m_PIDController2->Enable();
+}
+
+void Chassis::restartMotion() {
+	m_PIDController1->SetSetpoint(0);
+	m_PIDController2->SetSetpoint(0);
+	m_PIDController1->Disable();
+	m_PIDController2->Disable();
+}
+//for tests
+double Chassis::getPIDValue1() {
+	return m_encoderLeft->Get();
+}
+
+double Chassis::getPIDValue2() {
+	return m_PIDController2->Get();
 }

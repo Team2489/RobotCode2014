@@ -35,9 +35,12 @@ public:
 	Encoder* m_encoderRight;
 	Encoder* m_encoderLeft;
 	ADXL345_2489* m_accelrometer;
+	PIDController* m_PIDController1;
+	PIDController* m_PIDController2;
 	Chassis(); 
 	virtual ~Chassis();
 	
+	void StopRobot();
 	void InitDefaultCommand();
 	void driveWithJoysticks(float, float);
 	void goStraight(float power = 1.0);
@@ -49,5 +52,9 @@ public:
 	void shiftUp();
 	void shiftDown();
 	void switchGear();
+	void restartMotion();
+	void stopMotion();
+	double getPIDValue1();
+	double getPIDValue2();
 };
 #endif
