@@ -35,3 +35,7 @@ void Intake::spitOut() {
 void Intake::suckIn() {
 	m_intakeJaguar1->Set(-1.0);
 }
+
+bool Intake::getSolenoid() {
+	return (m_intakeSolenoid1->Get() == DoubleSolenoid::kForward);
+}
