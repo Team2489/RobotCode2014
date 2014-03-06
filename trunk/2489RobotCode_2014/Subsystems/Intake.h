@@ -22,6 +22,7 @@ public:
 	void suckIn();
 	void spitOut();
 	void turnOff();
+	bool getSolenoid();
 };
 
 #endif

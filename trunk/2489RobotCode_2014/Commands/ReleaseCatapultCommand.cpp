@@ -9,6 +9,7 @@ ReleaseCatapultCommand::ReleaseCatapultCommand(float a_power, float a_time):
 {
 	// Use requires() here to declare subsystem dependencies
 	Requires(catapult);
+	Requires(intake);
 }
 
 ReleaseCatapultCommand::~ReleaseCatapultCommand()
@@ -42,14 +43,19 @@ void ReleaseCatapultCommand::Initialize() {
 	printf("ReleaseCatapultCommand::Initialize()\n");
 	deleteTask();
 	m_TaskDone = false;
+	if(intake->getSolenoid()){
+		m_TaskDone = true;
+	}
 }
 
 // Called repeatedly when this Command is scheduled to run
 void ReleaseCatapultCommand::Execute() {
 	printf("ReleaseCatapultCommand::Execute()\n");
-	if(m_CatapultRunTask == NULL) {
-		m_CatapultRunTask = new Task("CatapultRun", (FUNCPTR)CatapultRunProc);
-		m_CatapultRunTask->Start((uint32_t)this);
+	if(!m_TaskDone) {
+		if(m_CatapultRunTask == NULL) {
+			m_CatapultRunTask = new Task("CatapultRun", (FUNCPTR)CatapultRunProc);
+			m_CatapultRunTask->Start((uint32_t)this);
+		}
 	}
 }
 
