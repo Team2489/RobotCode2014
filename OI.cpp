@@ -99,15 +99,15 @@ OI::OI():
 	//assign events to buttons
 	m_rightButton8->WhenPressed(new LightControl(true));
 	m_rightButton9->WhenPressed(new LightControl(false));
-
+	m_rightTrigger->WhenPressed(new ShiftUp());
 	m_gameButton1->WhenPressed(new LaunchBallOverTrussGroup());
 	m_gameButton4->WhenPressed(new ShootBallIntoGoalGroup());
 	m_gameButton5->WhileHeld(new IntakeForwardBack(false, 0.2));
 	m_gameButton7->WhileHeld(new IntakeForwardBack(true, 0.2));
-	m_gameButton6->WhenPressed(new IntakeUpDown(true));
-	m_gameButton8->WhenPressed(new IntakeUpDown(false));
+	m_gameButton6->WhenPressed(new IntakeUpDown(true, 1));
+	m_gameButton8->WhenPressed(new IntakeUpDown(false, 1));
 	
-	m_leftTrigger->WhenPressed(new ShiftGear());
+	m_leftTrigger->WhenPressed(new ShiftDown());
 //	m_leftButton7->WhenPressed(new RobotStay(5.0));
 	
 	//Testing only: Drive forward 10 inches at 0.5 power level
