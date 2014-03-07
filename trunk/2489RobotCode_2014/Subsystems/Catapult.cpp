@@ -6,7 +6,7 @@ Catapult::Catapult() : Subsystem("catapult"),
 	m_catapultMotor1(CATAPULT_MOTOR_1_PWM),
 	m_catapultMotor2(CATAPULT_MOTOR_2_PWM),
 	m_catapultMotor3(CATAPULT_MOTOR_3_PWM),
-	m_sensor(CATAPULT_SENSOR_IO)
+	m_sensor(CATAPULT_SENSOR_IO),
 {
 
 }

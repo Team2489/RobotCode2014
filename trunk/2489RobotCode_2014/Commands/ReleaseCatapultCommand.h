@@ -14,6 +14,7 @@ private:
 	bool m_TaskDone;
 	float m_power;
 	float m_time;
+	float m_inputTime;
 	
 	static void CatapultRunProc(ReleaseCatapultCommand* a_ptr);
 	void deleteTask();

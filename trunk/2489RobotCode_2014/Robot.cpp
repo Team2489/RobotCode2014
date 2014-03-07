@@ -69,8 +69,8 @@ void Robot::TeleopPeriodic() {
 		Scheduler::GetInstance()->Run();
 		//oi->printCrouch();
 		CommandBase::oi->printTargeting();
+		CommandBase::oi->printDurationValue();
 		CommandBase::oi->printAngle();
-		CommandBase::oi->printCatapultSpeed();
 		CommandBase::oi->UpdateScreen(); //Don't put print out below this line
 		// oi->printVariant();
 	//	cout << "sensor = " << Robot::shooter->pistonSensor->Get() << endl;

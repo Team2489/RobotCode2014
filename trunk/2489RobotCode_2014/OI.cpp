@@ -33,6 +33,7 @@
 #include "Commands/ReleaseCatapultCommand.h"
 #include "Commands/ResetCatapultCommand.h"
 #include "Commands/ShootBallIntoGoalGroup.h"
+#include "Commands/LaunchBallOverTrussGroup.h"
 const double OI::PotRange = 3.2;
 OI::OI():
 		m_EasyButton(1)
@@ -96,36 +97,18 @@ OI::OI():
 	m_gameButton8 = new JoystickButton(m_gameStick, 8);
 	
 	//assign events to buttons
-//	m_rightTrigger->WhileHeld(new RunCatapultTest(0, 0));
-//	m_rightTrigger->WhenPressed(new ShootBallIntoGoalGroup());
-	m_rightTrigger->WhenPressed(new DriveWithJoysticks());
-//	m_rightButton2->WhenPressed(new Autonomous1());
-//	m_rightButton4->WhenPressed(new TurnAngle(-45.0, TURNANGLETOLERENCE, TURNANGLEDELTA, TURNANGLEZONE, COMPENSATION, 2));
-//	m_rightButton5->WhenPressed(new TurnAngle(45.0, TURNANGLETOLERENCE, TURNANGLEDELTA, TURNANGLEZONE, COMPENSATION, 2));
-//	m_rightButton6->WhenPressed(new RunCatapultTest(0, 0.2));
-	m_rightButton7->WhenPressed(new ReleaseCatapultCommand(0.5, 0.4));
 	m_rightButton8->WhenPressed(new LightControl(true));
 	m_rightButton9->WhenPressed(new LightControl(false));
-	
-	
-//	m_gameButton2->WhenPressed(new ShootBallIntoTrussGroup());
+
+	m_gameButton1->WhenPressed(new LaunchBallOverTrussGroup());
 	m_gameButton4->WhenPressed(new ShootBallIntoGoalGroup());
 	m_gameButton5->WhileHeld(new IntakeForwardBack(false, 0.2));
 	m_gameButton7->WhileHeld(new IntakeForwardBack(true, 0.2));
 	m_gameButton6->WhenPressed(new IntakeUpDown(true));
 	m_gameButton8->WhenPressed(new IntakeUpDown(false));
 	
-	
-//	m_rightButton10->WhenPressed(new RunCatapultTest(0, 0.7));
-//	m_rightButton11->WhenPressed(new RetractPiston());
-//	m_rightButton11->WhenPressed(new RunCatapultTest(0, 1));
-	
 	m_leftTrigger->WhenPressed(new ShiftGear());
-//	m_leftButton3->WhenPressed(new ShiftGear());
-//	m_leftButton4->WhenPressed(new ShiftDown());
-//	m_leftButton5->WhenPressed(new ShiftUp());
 //	m_leftButton7->WhenPressed(new RobotStay(5.0));
-//	m_leftButton6->WhenPressed(new ReleaseCatapultCommand(0.4, 0.55));
 	
 	//Testing only: Drive forward 10 inches at 0.5 power level
 //	m_leftButton7->WhenPressed(new DriveDistanceCommand(200, 0.5)); 
@@ -196,8 +179,9 @@ float OI::getCatapultSpeed(){
 	return catapultspeed;	
 }
 
-
-
+float OI::getCatapultDuration(){
+	return 0.4 * getCatapultSpeed();
+}
 
 
 void OI::printTargeting(){
@@ -217,9 +201,8 @@ void OI::printTargeting(){
 }
 
 
-void OI::printCatapultSpeed(){
-	double catapultspeed = getCatapultSpeed();
-	screen->PrintfLine(DriverStationLCD::kUser_Line3, "Catapult Speed: %f2.2", catapultspeed);
+void OI::printDurationValue(){
+	screen->PrintfLine(DriverStationLCD::kUser_Line3, "Duration: %f", getCatapultDuration());
 }
 
 void OI::UpdateScreen(){
