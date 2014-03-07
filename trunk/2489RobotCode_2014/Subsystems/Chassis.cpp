@@ -89,7 +89,7 @@ void Chassis::driveWithJoysticks(float leftstick, float rightstick) {
 		leftstick = 0;
 	}
 	if(rightstick != 0 || leftstick != 0){
-		cout << "Right " << rightstick << " Left " << leftstick << endl;
+//		cout << "Right " << rightstick << " Left " << leftstick << endl;
 	}
 	drive->TankDrive( rightstick, leftstick);
 #endif
