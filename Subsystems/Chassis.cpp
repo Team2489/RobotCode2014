@@ -78,7 +78,7 @@ void Chassis::InitDefaultCommand() {
 	//SetDefaultCommand(new MySpecialCommand());
 	SetDefaultCommand(new DriveWithJoysticks());
 }
-void Chassis::driveWithJoysticks(float rightstick, float leftstick) {
+void Chassis::driveWithJoysticks(float leftstick, float rightstick) {
 #ifdef TESTERBOT
 	drive->TankDrive(leftstick, rightstick);
 #else

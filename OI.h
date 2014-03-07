@@ -64,11 +64,12 @@ public:
 	float getCrouch();
 	AutonomousVariant getAutonomousVariant();
 	float getCatapultSpeed();
+	float getCatapultDuration();
 	bool getReverseDirection();
 	void printCrouch();
 	void printAngle();
 	void printVariant();
-	void printCatapultSpeed();
+	void printDurationValue();
 	void printTargeting();
 	void UpdateScreen();
 	

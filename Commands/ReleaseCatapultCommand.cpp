@@ -4,8 +4,8 @@ ReleaseCatapultCommand::ReleaseCatapultCommand(float a_power, float a_time):
 	m_CatapultRunTask(NULL),
 	m_TaskDone(false),
 	m_power(a_power),
-	m_time(a_time)
-
+	m_time(0),
+	m_inputTime(a_time)
 {
 	// Use requires() here to declare subsystem dependencies
 	Requires(catapult);
@@ -43,6 +43,10 @@ void ReleaseCatapultCommand::Initialize() {
 	printf("ReleaseCatapultCommand::Initialize()\n");
 	deleteTask();
 	m_TaskDone = false;
+	m_time = m_inputTime;
+	if(m_time == 0) {
+		m_time = oi->getCatapultDuration();
+	}
 	if(intake->getSolenoid()){
 		m_TaskDone = true;
 	}
@@ -50,7 +54,11 @@ void ReleaseCatapultCommand::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void ReleaseCatapultCommand::Execute() {
-	printf("ReleaseCatapultCommand::Execute()\n");
+	printf("ReleaseCatapultCommand::Execute() - power=%f, duration=%f, dial=%f\n", 
+			m_power, 
+			m_time,
+			oi->getCatapultDuration()
+	);
 	if(!m_TaskDone) {
 		if(m_CatapultRunTask == NULL) {
 			m_CatapultRunTask = new Task("CatapultRun", (FUNCPTR)CatapultRunProc);

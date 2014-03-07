@@ -15,7 +15,8 @@ private:
 	Jaguar m_catapultMotor2;
 	Jaguar m_catapultMotor3;
 	
-	DigitalInput m_sensor;	
+	DigitalInput m_sensor;
+
 	
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities

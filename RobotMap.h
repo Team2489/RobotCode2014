@@ -30,10 +30,16 @@
 #define CATAPULT_MOTOR_2_PWM 6
 #define CATAPULT_MOTOR_3_PWM 7
 #define CATAPULT_SENSOR_IO   14
+#define CATAPULT_SENSOR2_IO  15
 
-#define SHOOT_FOR_THE_GOAL_POWER 	0.15
-#define SHOOT_FOR_THE_GOAL_DURATION 0.30
-#define CATAPULT_RESET_POWER		0.4
+#define SHOOT_FOR_THE_GOAL_POWER 		0.90
+#define SHOOT_FOR_THE_GOAL_DURATION 	0
+
+#define CATAPULT_RESET_POWER			0.10
+#define SHOOT_OVER_THE_TRUSS_POWER		1.00 //0.90
+
+// rely on the value from the dial on the driver station
+#define SHOOT_OVER_THE_TRUSS_DURATION 	0 
 
 //Solenoids
 #define PUMPSPIKESOLENOID 1
