@@ -21,8 +21,11 @@ class Chassis: public Subsystem {
 private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
+	bool m_ReverseDirectionControl;
+	
 	void __shiftUp();
 	void __shiftDown();
+	void Drive(float leftMotor, float rightMotor);
 	
 public:
 	Gyro* m_gyro;
@@ -56,5 +59,6 @@ public:
 	void stopMotion();
 	double getPIDValue1();
 	double getPIDValue2();
+	void setReverseDirectionControl(bool value);
 };
 #endif

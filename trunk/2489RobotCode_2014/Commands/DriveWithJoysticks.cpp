@@ -24,11 +24,7 @@ void DriveWithJoysticks::Execute() {
 	float left = oi->getm_leftStick()->GetY();
 	float right = oi->getm_rightStick()->GetY();
 	
-	if(oi->getReverseDirection()) {
-		left = -oi->getm_rightStick()->GetY();
-		right = -oi->getm_leftStick()->GetY();
-	}
-	chassis->driveWithJoysticks(right*oi->getCrouch(), left*oi->getCrouch());
+	chassis->driveWithJoysticks(left*oi->getCrouch(), right*oi->getCrouch());
 //	cout << "DriveWithJoysticks::Execute" << endl;
 }
 // Make this return true when this Command no longer needs to run execute()

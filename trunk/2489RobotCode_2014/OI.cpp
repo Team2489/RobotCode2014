@@ -34,6 +34,7 @@
 #include "Commands/ResetCatapultCommand.h"
 #include "Commands/ShootBallIntoGoalGroup.h"
 #include "Commands/LaunchBallOverTrussGroup.h"
+#include "Commands/ReverseChassisDirectionControlCommand.h"
 const double OI::PotRange = 3.2;
 OI::OI():
 		m_EasyButton(1)
@@ -68,6 +69,7 @@ OI::OI():
 	m_rightButton10 = new JoystickButton(m_rightStick, 10);
 	m_rightButton11 = new JoystickButton(m_rightStick, 11);
 	
+	m_leftButton2 = new JoystickButton(m_leftStick, 2);
 	m_leftButton3 = new JoystickButton(m_leftStick, 3);
 	m_leftButton4 = new JoystickButton(m_leftStick, 4);
 	m_leftButton5 = new JoystickButton(m_leftStick, 5);
@@ -97,6 +99,8 @@ OI::OI():
 	m_gameButton8 = new JoystickButton(m_gameStick, 8);
 	
 	//assign events to buttons
+	m_rightButton2->WhenPressed(new ReverseChassisDirectionControlCommand(false));
+	m_rightButton7->WhenPressed(new DriveDistanceCommand(20,0.5));
 	m_rightButton8->WhenPressed(new LightControl(true));
 	m_rightButton9->WhenPressed(new LightControl(false));
 	m_rightTrigger->WhenPressed(new ShiftUp());
@@ -104,11 +108,13 @@ OI::OI():
 	m_gameButton4->WhenPressed(new ShootBallIntoGoalGroup());
 	m_gameButton5->WhileHeld(new IntakeForwardBack(false, 0.2));
 	m_gameButton7->WhileHeld(new IntakeForwardBack(true, 0.2));
-	m_gameButton6->WhenPressed(new IntakeUpDown(true, 1));
-	m_gameButton8->WhenPressed(new IntakeUpDown(false, 1));
+	m_gameButton6->WhenPressed(new IntakeUpDown(true));
+	m_gameButton8->WhenPressed(new IntakeUpDown(false));
 	
 	m_leftTrigger->WhenPressed(new ShiftDown());
-//	m_leftButton7->WhenPressed(new RobotStay(5.0));
+	m_leftButton2->WhenPressed(new ReverseChassisDirectionControlCommand(true));
+	//	m_leftButton7->WhenPressed(new RobotStay(5.0));
+	//  m_leftButton7->WhenPressed(new TurnLeft(1.0));
 	
 	//Testing only: Drive forward 10 inches at 0.5 power level
 //	m_leftButton7->WhenPressed(new DriveDistanceCommand(200, 0.5)); 
@@ -207,4 +213,8 @@ void OI::printDurationValue(){
 
 void OI::UpdateScreen(){
 	screen->UpdateLCD();
+}
+
+void OI::SetLEDState(bool value){
+	DriverStation::GetInstance()->GetEnhancedIO().SetDigitalOutput(13, value);
 }

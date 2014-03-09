@@ -29,6 +29,7 @@ private:
 	JoystickButton* m_rightButton9;
 	JoystickButton* m_rightButton10;
 	JoystickButton* m_rightButton11;
+	JoystickButton* m_leftButton2;
 	JoystickButton* m_leftButton3;
 	JoystickButton* m_leftButton4;
 	JoystickButton* m_leftButton5;
@@ -72,6 +73,7 @@ public:
 	void printDurationValue();
 	void printTargeting();
 	void UpdateScreen();
+	void SetLEDState(bool value);
 	
 };
 #endif
