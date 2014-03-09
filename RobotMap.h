@@ -34,7 +34,7 @@
 
 #define SHOOT_FOR_THE_GOAL_POWER 		1.00
 // this is a value for shooting from about 0 to 1 foot from the fender
-#define SHOOT_FOR_THE_GOAL_DURATION 	0.25
+#define SHOOT_FOR_THE_GOAL_DURATION 	0.248
 
 #define CATAPULT_RESET_POWER			0.10
 #define SHOOT_OVER_THE_TRUSS_POWER		1.00 //0.90
@@ -68,6 +68,7 @@
 //Intake Solenoid
 #define INTAKE_SOLENOID1_RIGHT_PORT 4
 #define INTAKE_SOLENOID1_LEFT_PORT 5
+
 //Intake Jaguar
 #define INTAKE_JAGUAR_PWM 8
 

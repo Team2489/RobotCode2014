@@ -13,7 +13,9 @@
 #include <math.h>
 
 
-Chassis::Chassis() : Subsystem("Chassis") {
+Chassis::Chassis() : Subsystem("Chassis"),
+	m_ReverseDirectionControl(false)
+{
 	m_gyro = new Gyro(MODULE1NUM, CHASSISGYROANALOG);
 	m_gyro->SetSensitivity(1.25);
 #ifdef TESTERBOT	
@@ -80,8 +82,14 @@ void Chassis::InitDefaultCommand() {
 }
 void Chassis::driveWithJoysticks(float leftstick, float rightstick) {
 #ifdef TESTERBOT
-	drive->TankDrive(leftstick, rightstick);
+	Drive(leftstick, rightstick);
 #else
+	
+	// joystick gives negative value when pushed forward
+	// reverse it
+	leftstick = -leftstick;
+	rightstick = -rightstick;
+	
 	if(fabs(rightstick) < 0.05){
 		rightstick = 0;
 	}
@@ -89,27 +97,33 @@ void Chassis::driveWithJoysticks(float leftstick, float rightstick) {
 		leftstick = 0;
 	}
 	if(rightstick != 0 || leftstick != 0){
-//		cout << "Right " << rightstick << " Left " << leftstick << endl;
+		cout << "Right " << rightstick << " Left " << leftstick << endl;
 	}
-	drive->TankDrive( rightstick, leftstick);
+	
+	if(m_ReverseDirectionControl) {
+		float temp = rightstick;
+		rightstick = -leftstick;
+		leftstick = -temp;
+	}
+	Drive(leftstick, rightstick);
 #endif
 }
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 void Chassis::goStraight(float power){
-	drive->TankDrive(power*CommandBase::oi->getCrouch(), power*CommandBase::oi->getCrouch());
+	Drive(power*CommandBase::oi->getCrouch(), power*CommandBase::oi->getCrouch());
 }
 void Chassis::goBack(float power){
-	drive->TankDrive(-power*CommandBase::oi->getCrouch(), -power*CommandBase::oi->getCrouch());
+	Drive(-power*CommandBase::oi->getCrouch(), -power*CommandBase::oi->getCrouch());
 }
 void Chassis::stop(){
-	drive->TankDrive(0*CommandBase::oi->getCrouch(), 0*CommandBase::oi->getCrouch());
+	Drive(0*CommandBase::oi->getCrouch(), 0*CommandBase::oi->getCrouch());
 }
 void Chassis::turnLeft(){
-	drive->TankDrive(-1.0*CommandBase::oi->getCrouch(), 1.0*CommandBase::oi->getCrouch());
+	Drive(-1.0*CommandBase::oi->getCrouch(), 1.0*CommandBase::oi->getCrouch());
 }
 void Chassis::turnRight(){
-	drive->TankDrive(1.0*CommandBase::oi->getCrouch(), -1.0*CommandBase::oi->getCrouch());
+	Drive(1.0*CommandBase::oi->getCrouch(), -1.0*CommandBase::oi->getCrouch());
 }
 void Chassis::getAccel(){
 	double tempx = m_accelrometer->GetAcceleration(ADXL345_2489::kAxis_X);
@@ -178,4 +192,13 @@ double Chassis::getPIDValue1() {
 
 double Chassis::getPIDValue2() {
 	return m_PIDController2->Get();
+}
+
+void Chassis::setReverseDirectionControl(bool value) {
+	m_ReverseDirectionControl = value;
+}
+
+void Chassis::Drive(float leftMotor, float rightMotor)
+{
+	drive->TankDrive(-leftMotor, -rightMotor);
 }
