@@ -1,7 +1,7 @@
 #include "IntakeUpDown.h"
 #include "../RobotMap.h"
 
-IntakeUpDown::IntakeUpDown(bool isUp)
+IntakeUpDown::IntakeUpDown(bool isUp, double timeout)
 
 {
 	// Use requires() here to declare subsystem dependencies
@@ -9,12 +9,16 @@ IntakeUpDown::IntakeUpDown(bool isUp)
 	Requires(intake);
 	intakeIsUp = isUp;
 	commandIsFinished = false;
+	m_timeout = timeout;
 
 }
 
 // Called just before this Command runs the first time
 void IntakeUpDown::Initialize() {
-	
+	printf("IntakeUpDown\n");
+	if (m_timeout) {
+		SetTimeout(m_timeout);
+	}
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -28,7 +32,12 @@ void IntakeUpDown::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool IntakeUpDown::IsFinished() {
-	return commandIsFinished;
+	if (m_timeout) {
+		return IsTimedOut();
+	} else {
+		return commandIsFinished;
+	}
+	
 }
 
 // Called once after isFinished returns true
