@@ -16,30 +16,7 @@ void Robot::RobotInit() {
 	autonomousCommand = new AutonomousCommand();
 	teleopCommand = new DriveWithJoysticks();
 	
-#if 0
-	OI::AutonomousVariant variant = oi->getAutonomousVariant();
-	switch (variant) {
-	case OI::AV_2:
-		autonomousCommand = new Autonomous1();
-		break;
-	case OI::AV_4:
-	//	autonomousCommand = new Autonomous4();
-		autonomousCommand = new Autonomous1();
-		break;
-	case OI::AV_6:
-	//	autonomousCommand = new Autonomous2();
-		autonomousCommand = new Autonomous1();
-		break;
-	case OI::AV_8:
-		//autonomousCommand = new DriveInSquare();
-		autonomousCommand = new Autonomous1();
-		break;
-	default:
-		break;
-	}
-#else
 	autonomousCommand = new AutonomousCommand();
-#endif /* 0 */
   }
 void Robot::AutonomousInit() {	
 	if (autonomousCommand != NULL)

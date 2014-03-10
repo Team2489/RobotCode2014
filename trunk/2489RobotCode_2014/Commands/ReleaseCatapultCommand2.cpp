@@ -1,6 +1,6 @@
-#include "ReleaseCatapultCommand.h"
+#include "ReleaseCatapultCommand2.h"
 
-ReleaseCatapultCommand::ReleaseCatapultCommand(float a_power, float a_time):
+ReleaseCatapultCommand2::ReleaseCatapultCommand2(float a_power, float a_time):
 	m_CatapultRunTask(NULL),
 	m_TaskDone(false),
 	m_power(a_power),
@@ -12,12 +12,12 @@ ReleaseCatapultCommand::ReleaseCatapultCommand(float a_power, float a_time):
 	Requires(intake);
 }
 
-ReleaseCatapultCommand::~ReleaseCatapultCommand()
+ReleaseCatapultCommand2::~ReleaseCatapultCommand2()
 {
 	deleteTask();
 }
 
-void ReleaseCatapultCommand::CatapultRunProc(ReleaseCatapultCommand* a_ptr)
+void ReleaseCatapultCommand2::CatapultRunProc(ReleaseCatapultCommand2* a_ptr)
 {
 	printf("CatapultRunProc is working\n");
 	catapult->RunCatapultMotors(a_ptr->m_power);
@@ -27,7 +27,7 @@ void ReleaseCatapultCommand::CatapultRunProc(ReleaseCatapultCommand* a_ptr)
 	a_ptr->m_TaskDone = true;
 }
 
-void ReleaseCatapultCommand::deleteTask()
+void ReleaseCatapultCommand2::deleteTask()
 {
 	if(m_CatapultRunTask != NULL) {
 		m_CatapultRunTask->Stop();
@@ -39,14 +39,12 @@ void ReleaseCatapultCommand::deleteTask()
 
 
 // Called just before this Command runs the first time
-void ReleaseCatapultCommand::Initialize() {
+void ReleaseCatapultCommand2::Initialize() {
 	printf("ReleaseCatapultCommand::Initialize()\n");
 	deleteTask();
 	m_TaskDone = false;
 	m_time = m_inputTime;
-	if(m_time == 0) {
-		m_time = oi->getCatapultDuration();
-	}
+	
 	if(intake->getSolenoid()){
 		printf("TaskDone\n");
 		m_TaskDone = true;
@@ -54,11 +52,11 @@ void ReleaseCatapultCommand::Initialize() {
 }
 
 // Called repeatedly when this Command is scheduled to run
-void ReleaseCatapultCommand::Execute() {
+void ReleaseCatapultCommand2::Execute() {
 	printf("ReleaseCatapultCommand::Execute() - power=%f, duration=%f, dial=%f\n", 
 			m_power, 
 			m_time,
-			oi->getCatapultDuration()
+			0.0
 	);
 	if(!m_TaskDone) {
 		if(m_CatapultRunTask == NULL) {
@@ -70,20 +68,20 @@ void ReleaseCatapultCommand::Execute() {
 
 
 // Make this return true when this Command no longer needs to run execute()
-bool ReleaseCatapultCommand::IsFinished() {
+bool ReleaseCatapultCommand2::IsFinished() {
 	printf("ReleaseCatapultCommand::IsFinished()\n");
 	return m_TaskDone;
 }
 
 // Called once after isFinished returns true
-void ReleaseCatapultCommand::End() {
+void ReleaseCatapultCommand2::End() {
 	printf("ReleaseCatapultCommand::End()\n");
 	deleteTask();
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void ReleaseCatapultCommand::Interrupted() {
+void ReleaseCatapultCommand2::Interrupted() {
 	printf("ReleaseCatapultCommand::Interrupted()\n");
 	End();
 }

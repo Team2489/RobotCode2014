@@ -106,15 +106,15 @@ OI::OI():
 	m_rightTrigger->WhenPressed(new ShiftUp());
 	m_gameButton1->WhenPressed(new LaunchBallOverTrussGroup());
 	m_gameButton4->WhenPressed(new ShootBallIntoGoalGroup());
-	m_gameButton5->WhileHeld(new IntakeForwardBack(false, 0.2));
-	m_gameButton7->WhileHeld(new IntakeForwardBack(true, 0.2));
-	m_gameButton6->WhenPressed(new IntakeUpDown(true));
-	m_gameButton8->WhenPressed(new IntakeUpDown(false));
+	m_gameButton5->WhileHeld(new IntakeForwardBack(false, 0.2)); //rotate in
+	m_gameButton7->WhileHeld(new IntakeForwardBack(true, 0.2));  //rotate out
+	m_gameButton6->WhenPressed(new IntakeUpDown(true, 0.0));			//go in
+	m_gameButton8->WhenPressed(new IntakeUpDown(false, 0.0));		//go out
 	
 	m_leftTrigger->WhenPressed(new ShiftDown());
 	m_leftButton2->WhenPressed(new ReverseChassisDirectionControlCommand(true));
 	//	m_leftButton7->WhenPressed(new RobotStay(5.0));
-	//  m_leftButton7->WhenPressed(new TurnLeft(1.0));
+	//	m_leftButton7->WhenPressed(new RobotStay(5.0));
 	
 	//Testing only: Drive forward 10 inches at 0.5 power level
 //	m_leftButton7->WhenPressed(new DriveDistanceCommand(200, 0.5)); 
