@@ -35,9 +35,11 @@ bool IntakeForwardBack2::IsFinished() {
 
 // Called once after isFinished returns true
 void IntakeForwardBack2::End() {
+	intake->turnOff();
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void IntakeForwardBack2::Interrupted() {
+	intake->turnOff();
 }

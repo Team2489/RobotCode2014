@@ -7,6 +7,7 @@
 #include "../RobotMap.h"
 #include "ShootBallIntoGoalGroup.h"
 #include "ReleaseCatapultCommand2.h"
+#include "WaitVision.h"
 
 AutonomousCommand::AutonomousCommand() {
         // Add Commands here:
@@ -26,14 +27,15 @@ AutonomousCommand::AutonomousCommand() {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
 	
-	AddSequential(new DriveDistanceCommand(-20, 0.5));
-	AddParallel(new IntakeForwardBack2(false, 0.5));
-	AddSequential(new IntakeUpDown(false, 3.0));
+	AddSequential(new WaitVision(5.0));
+	AddSequential(new DriveDistanceCommand(-155, 1.0));
+	AddParallel(new IntakeForwardBack2(false, 0.3));
+	AddSequential(new IntakeUpDown(false, 0.8));
 #if 1
 	printf("Autonomous point 1\n");
 	AddSequential(new ReleaseCatapultCommand2(
 			1.0, 
-			.236
+			.246
 	));
 	printf("Autonomous Point 2\n");
 	AddSequential(new ResetCatapultCommand());	
