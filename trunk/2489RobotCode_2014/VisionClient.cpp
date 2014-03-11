@@ -86,7 +86,7 @@ VisionClient::VisionClient(void)
 	m_enabled = true;
 	m_semaphore = semBCreate(SEM_Q_PRIORITY, SEM_FULL);
 	m_task = new Task("2489VisionClient", (FUNCPTR)MainLoop);
-	client = new TCPClient("10.24.89.15");
+	client = new TCPClient("10.98.42.15");
 	cout << "VisionClient::VisionClient: m_enabled = " << m_enabled << endl;
 }
 
