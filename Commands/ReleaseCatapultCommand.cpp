@@ -10,6 +10,7 @@ ReleaseCatapultCommand::ReleaseCatapultCommand(float a_power, float a_time):
 	// Use requires() here to declare subsystem dependencies
 	Requires(catapult);
 	Requires(intake);
+	Requires(pump);
 }
 
 ReleaseCatapultCommand::~ReleaseCatapultCommand()
@@ -42,6 +43,7 @@ void ReleaseCatapultCommand::deleteTask()
 void ReleaseCatapultCommand::Initialize() {
 	printf("ReleaseCatapultCommand::Initialize()\n");
 	deleteTask();
+	pump->stopCompressor();
 	m_TaskDone = false;
 	m_time = m_inputTime;
 	if(m_time == 0) {
@@ -79,6 +81,7 @@ bool ReleaseCatapultCommand::IsFinished() {
 void ReleaseCatapultCommand::End() {
 	printf("ReleaseCatapultCommand::End()\n");
 	deleteTask();
+	pump->startCompressor();
 }
 
 // Called when another command which requires one or more of the same

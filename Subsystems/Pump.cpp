@@ -18,5 +18,14 @@ void Pump::InitDefaultCommand() {
 	// Set the default command for a subsystem here.
 	//SetDefaultCommand(new MySpecialCommand());
 }
+
+void Pump::stopCompressor() {
+	m_compressor1->Stop();
+}
+
+void Pump::startCompressor() {
+	m_compressor1->Start();
+}
+
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

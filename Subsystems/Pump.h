@@ -24,5 +24,7 @@ public:
 	Compressor* m_compressor1;
 	Pump();
 	void InitDefaultCommand();
+	void stopCompressor();
+	void startCompressor();
 };
 #endif
