@@ -34,7 +34,13 @@
 
 #define SHOOT_FOR_THE_GOAL_POWER 		1.00
 // this is a value for shooting from about 0 to 1 foot from the fender
-#define SHOOT_FOR_THE_GOAL_DURATION 	0
+#define SHOOT_FOR_THE_GOAL_DURATION 	.248
+
+#define SHOOT_CLOSE_COMMAND_POWER 		1.00
+#define	SHOOT_CLOSE_COMMAND_DURATION	.188
+
+#define SHOOT_WITH_DIAL_POWER			1.00
+#define	SHOOT_WITH_DIAL_DURATION		0
 
 #define CATAPULT_RESET_POWER			0.15
 #define SHOOT_OVER_THE_TRUSS_POWER		1.00 //0.90
