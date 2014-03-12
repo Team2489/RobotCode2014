@@ -1,17 +1,18 @@
-#include "ShootBallIntoGoalGroup.h"
+#include "ShootWithDialGroup.h"
 #include "ReleaseCatapultCommand.h"
 #include "ResetCatapultCommand.h"
 #include "../RobotMap.h"
 #include "IntakeForwardBack2.h"
 #include "IntakeUpDown.h"
 
-ShootBallIntoGoalGroup::ShootBallIntoGoalGroup() {
+ShootWithDialGroup::ShootWithDialGroup() {
     // these will run in order.
 	//AddParallel(new IntakeForwardBack2(false, 0.3));
 	AddSequential(new IntakeUpDown(false, 0.8));
 	AddSequential(new ReleaseCatapultCommand(
-			SHOOT_FOR_THE_GOAL_POWER, 
-			SHOOT_FOR_THE_GOAL_DURATION
+			SHOOT_WITH_DIAL_POWER, 
+			SHOOT_WITH_DIAL_DURATION
 	));
 	AddSequential(new ResetCatapultCommand());
+	
 }

@@ -35,6 +35,8 @@
 #include "Commands/ShootBallIntoGoalGroup.h"
 #include "Commands/LaunchBallOverTrussGroup.h"
 #include "Commands/ReverseChassisDirectionControlCommand.h"
+#include "Commands/ShootCloseCommandGroup.h"
+#include "Commands/ShootWithDialGroup.h"
 const double OI::PotRange = 3.2;
 OI::OI():
 		m_EasyButton(1)
@@ -105,6 +107,8 @@ OI::OI():
 	m_rightButton9->WhenPressed(new LightControl(false));
 	m_rightTrigger->WhenPressed(new ShiftUp());
 	m_gameButton1->WhenPressed(new LaunchBallOverTrussGroup());
+	m_gameButton2->WhenPressed(new ShootCloseCommandGroup());
+	m_gameButton3->WhenPressed(new ShootWithDialGroup());
 	m_gameButton4->WhenPressed(new ShootBallIntoGoalGroup());
 	m_gameButton5->WhileHeld(new IntakeForwardBack(false, 0.2)); //rotate in
 	m_gameButton7->WhileHeld(new IntakeForwardBack(true, 0.2));  //rotate out
