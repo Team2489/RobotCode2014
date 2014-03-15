@@ -20,11 +20,11 @@ ReleaseCatapultCommand::~ReleaseCatapultCommand()
 
 void ReleaseCatapultCommand::CatapultRunProc(ReleaseCatapultCommand* a_ptr)
 {
-	printf("CatapultRunProc is working\n");
+//	printf("CatapultRunProc is working\n");
 	catapult->RunCatapultMotors(a_ptr->m_power);
 	Wait(a_ptr->m_time);
 	catapult->RunCatapultMotors(0);
-	printf("CatapultRunProc ended\n");
+//	printf("CatapultRunProc ended\n");
 	a_ptr->m_TaskDone = true;
 }
 
@@ -41,7 +41,7 @@ void ReleaseCatapultCommand::deleteTask()
 
 // Called just before this Command runs the first time
 void ReleaseCatapultCommand::Initialize() {
-	printf("ReleaseCatapultCommand::Initialize()\n");
+//	printf("ReleaseCatapultCommand::Initialize()\n");
 	deleteTask();
 	pump->stopCompressor();
 	m_TaskDone = false;
@@ -50,18 +50,18 @@ void ReleaseCatapultCommand::Initialize() {
 		m_time = oi->getCatapultDuration();
 	}
 	if(intake->getSolenoid()){
-		printf("TaskDone\n");
+//		printf("TaskDone\n");
 		m_TaskDone = true;
 	}
 }
 
 // Called repeatedly when this Command is scheduled to run
 void ReleaseCatapultCommand::Execute() {
-	printf("ReleaseCatapultCommand::Execute() - power=%f, duration=%f, dial=%f\n", 
+/*	printf("ReleaseCatapultCommand::Execute() - power=%f, duration=%f, dial=%f\n", 
 			m_power, 
 			m_time,
 			oi->getCatapultDuration()
-	);
+	);*/
 	if(!m_TaskDone) {
 		if(m_CatapultRunTask == NULL) {
 			m_CatapultRunTask = new Task("CatapultRun", (FUNCPTR)CatapultRunProc);
@@ -73,13 +73,13 @@ void ReleaseCatapultCommand::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool ReleaseCatapultCommand::IsFinished() {
-	printf("ReleaseCatapultCommand::IsFinished()\n");
+//	printf("ReleaseCatapultCommand::IsFinished()\n");
 	return m_TaskDone;
 }
 
 // Called once after isFinished returns true
 void ReleaseCatapultCommand::End() {
-	printf("ReleaseCatapultCommand::End()\n");
+//	printf("ReleaseCatapultCommand::End()\n");
 	deleteTask();
 	pump->startCompressor();
 }
@@ -87,6 +87,6 @@ void ReleaseCatapultCommand::End() {
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void ReleaseCatapultCommand::Interrupted() {
-	printf("ReleaseCatapultCommand::Interrupted()\n");
+//	printf("ReleaseCatapultCommand::Interrupted()\n");
 	End();
 }

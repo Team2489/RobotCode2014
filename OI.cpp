@@ -154,6 +154,10 @@ void OI::printCrouch(){
 void OI::printAngle(){
 	screen->PrintfLine(DriverStationLCD::kUser_Line2, "Bngle: %f", CommandBase::chassis->m_gyro->PIDGet()*180);
 }
+void OI::printEncoderValues() {
+	screen->PrintfLine(DriverStationLCD::kUser_Line5, "LE: %f", CommandBase::chassis->m_encoderLeft->Get());
+	screen->PrintfLine(DriverStationLCD::kUser_Line6, "RE: %f", CommandBase::chassis->m_encoderRight->Get());
+}
 OI::AutonomousVariant OI::getAutonomousVariant(){
 	OI::AutonomousVariant ret = AV_NONE;
 	

@@ -15,7 +15,7 @@ IntakeUpDown::IntakeUpDown(bool isUp, double timeout)
 
 // Called just before this Command runs the first time
 void IntakeUpDown::Initialize() {
-	printf("IntakeUpDown\n");
+//	printf("IntakeUpDown\n");
 	if (m_timeout) {
 		SetTimeout(m_timeout);
 	}

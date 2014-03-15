@@ -97,7 +97,7 @@ void Chassis::driveWithJoysticks(float leftstick, float rightstick) {
 		leftstick = 0;
 	}
 	if(rightstick != 0 || leftstick != 0){
-		cout << "Right " << rightstick << " Left " << leftstick << endl;
+//		cout << "Right " << rightstick << " Left " << leftstick << endl;
 	}
 	
 	if(m_ReverseDirectionControl) {
@@ -112,6 +112,10 @@ void Chassis::driveWithJoysticks(float leftstick, float rightstick) {
 // here. Call these from Commands.
 void Chassis::goStraight(float power){
 	Drive(power*CommandBase::oi->getCrouch(), power*CommandBase::oi->getCrouch());
+}
+
+void Chassis::straightForward(){
+	Drive (-1.0,-1.0);
 }
 void Chassis::goBack(float power){
 	Drive(-power*CommandBase::oi->getCrouch(), -power*CommandBase::oi->getCrouch());
@@ -130,9 +134,9 @@ void Chassis::getAccel(){
 	double tempy = m_accelrometer->GetAcceleration(ADXL345_2489::kAxis_Y);
 	double tempz = m_accelrometer->GetAcceleration(ADXL345_2489::kAxis_Z);
 	
-	cout << " x1: " << tempx << " ";
-	cout << " y2: " << tempy << " ";
-	cout << " z1: " << tempz << " ";
+//	cout << " x1: " << tempx << " ";
+//	cout << " y2: " << tempy << " ";
+//	cout << " z1: " << tempz << " ";
 }
 
 void Chassis::__shiftUp(){

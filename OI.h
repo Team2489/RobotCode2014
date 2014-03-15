@@ -67,6 +67,7 @@ public:
 	float getCatapultSpeed();
 	float getCatapultDuration();
 	bool getReverseDirection();
+	void printEncoderValues();
 	void printCrouch();
 	void printAngle();
 	void printVariant();

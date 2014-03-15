@@ -15,8 +15,8 @@ void RobotStay::Initialize() {
 void RobotStay::Execute() {
 	double val1 = chassis->getPIDValue1();
 	double val2 = chassis->getPIDValue2();
-	printf("e: %f\n", val1);
-	printf("pid: %f\n", val2);
+//	printf("e: %f\n", val1);
+//	printf("pid: %f\n", val2);
 }
 
 // Make this return true when this Command no longer needs to run execute()

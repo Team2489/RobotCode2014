@@ -49,6 +49,7 @@ public:
 	void goStraight(float power = 1.0);
 	void goBack(float power = 1.0);
 	void stop();
+	void straightForward();
 	void turnLeft();
 	void turnRight();
 	void getAccel();
