@@ -10,7 +10,7 @@
 #include "Pump.h"
 #include "../Robotmap.h"
 Pump::Pump() : Subsystem("Pump") {
-	m_compressor1 = new Compressor(MODULE1NUM, PUMPSWITCHDIGITAL, MODULE1NUM, PUMPSPIKESOLENOID);
+	m_compressor1 = new Compressor(MODULE1NUM, PUMPSWITCHDIGITAL, MODULE1NUM, 2);
 	m_compressor1->Start();
 }
     

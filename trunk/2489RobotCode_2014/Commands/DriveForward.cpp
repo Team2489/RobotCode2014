@@ -20,7 +20,7 @@ void DriveForward::Initialize() {
 }
 // Called repeatedly when this Command is scheduled to run
 void DriveForward::Execute() {
-	chassis->goStraight();
+	chassis->straightForward();
 }
 // Make this return true when this Command no longer needs to run execute()
 bool DriveForward::IsFinished() {
@@ -28,9 +28,10 @@ bool DriveForward::IsFinished() {
 }
 // Called once after isFinished returns true
 void DriveForward::End() {
-	
+	chassis->stop();
 }
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void DriveForward::Interrupted() {
+	chassis->stop();
 }

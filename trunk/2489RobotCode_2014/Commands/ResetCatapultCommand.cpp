@@ -8,7 +8,7 @@ ResetCatapultCommand::ResetCatapultCommand() {
 
 // Called just before this Command runs the first time
 void ResetCatapultCommand::Initialize() {
-	
+	SetTimeout(3.0);
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -18,7 +18,7 @@ void ResetCatapultCommand::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool ResetCatapultCommand::IsFinished() {
-	return catapult->IsCatapultReset();
+	return (catapult->IsCatapultReset())|| IsTimedOut();
 }
 
 // Called once after isFinished returns true
