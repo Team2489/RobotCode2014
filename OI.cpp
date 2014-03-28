@@ -48,12 +48,12 @@ OI::OI():
 
 	
     // SmartDashboard Buttons
-	SmartDashboard::PutData("Autonomous Command", new AutonomousCommand());
-	SmartDashboard::PutData("RunTest", new RunTest());
-	SmartDashboard::PutData("DriveBackAndForth", new DriveBackAndForth());
-	SmartDashboard::PutData("DriveInSquare", new DriveInSquare());
+//	SmartDashboard::PutData("Autonomous Command", new AutonomousCommand());
+//	SmartDashboard::PutData("RunTest", new RunTest());
+//	SmartDashboard::PutData("DriveBackAndForth", new DriveBackAndForth());
+//	SmartDashboard::PutData("DriveInSquare", new DriveInSquare());
+//	SmartDashboard::PutData("TurnVarAngle", new TurnVarAngle());
 
-	SmartDashboard::PutData("TurnVarAngle", new TurnVarAngle());
 	screen = DriverStationLCD::GetInstance();
 //	m_enhancedIO = DriverStation::GetInstance()->GetEnhancedIO()
 	
@@ -141,7 +141,9 @@ float OI::getCrouch(){
 	return crouch;
 }
 
-bool OI::getReverseDirection() {
+bool OI::getAutonomousCatapultState() {
+	printf("Autonomous catapult state = %d\n", 
+			DriverStation::GetInstance()->GetEnhancedIO().GetDigital(12) );
 	return (DriverStation::GetInstance()->GetEnhancedIO().GetDigital(12) == 1);
 }
 
@@ -223,6 +225,6 @@ void OI::UpdateScreen(){
 	screen->UpdateLCD();
 }
 
-void OI::SetLEDState(bool value){
+void OI::SetLEDState(bool value){	//for the small LED light, indicates the driving direction 
 	DriverStation::GetInstance()->GetEnhancedIO().SetDigitalOutput(13, value);
 }

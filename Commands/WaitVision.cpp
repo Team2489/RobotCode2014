@@ -9,6 +9,7 @@ WaitVision::WaitVision(double timeout) {
 
 // Called just before this Command runs the first time
 void WaitVision::Initialize() {
+	printf("WaitVision::Initialize()\n");
 	SetTimeout(m_timeout);
 }
 
@@ -32,10 +33,11 @@ bool WaitVision::IsFinished() {
 
 // Called once after isFinished returns true
 void WaitVision::End() {
-	
+	printf("WaitVision::End()\n");
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void WaitVision::Interrupted() {
+	printf("WaitVision::Interrupted()\n");
 }

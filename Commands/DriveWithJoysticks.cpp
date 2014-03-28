@@ -16,8 +16,7 @@ DriveWithJoysticks::DriveWithJoysticks() {
 }
 // Called just before this Command runs the first time
 void DriveWithJoysticks::Initialize() {
-	
-	
+	printf("DriveWithJoysticks::Initialize()\n");
 }
 // Called repeatedly when this Command is scheduled to run
 void DriveWithJoysticks::Execute() {
@@ -33,9 +32,12 @@ bool DriveWithJoysticks::IsFinished() {
 }
 // Called once after isFinished returns true
 void DriveWithJoysticks::End() {
-	
+	printf("DriveWithJoysticks::End()\n");
 }
+
+
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void DriveWithJoysticks::Interrupted() {
+	printf("DriveWithJoysticks::Interrupted()\n");
 }
