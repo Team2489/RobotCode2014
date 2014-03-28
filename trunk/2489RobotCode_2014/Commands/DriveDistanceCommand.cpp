@@ -13,6 +13,8 @@ DriveDistanceCommand::DriveDistanceCommand(float distance, float power):
 
 // Called just before this Command runs the first time
 void DriveDistanceCommand::Initialize() {
+	printf("DriveDistanceCommand::Initialize()\n");
+	
 	chassis->m_encoderRight->Start();
 	chassis->m_encoderLeft->Start();
 	m_InitialValueRight = chassis->m_encoderRight->Get();
@@ -48,11 +50,13 @@ bool DriveDistanceCommand::IsFinished() {
 
 // Called once after isFinished returns true
 void DriveDistanceCommand::End() {
+	printf("DriveDistanceCommand::End()\n");
 	chassis->stop();
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void DriveDistanceCommand::Interrupted() {
+	printf("DriveDistanceCommand::Interrupted()\n");
 	chassis->stop();
 }

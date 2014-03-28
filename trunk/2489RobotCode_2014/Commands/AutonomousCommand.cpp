@@ -10,8 +10,10 @@
 #include "ShiftUp.h"
 #include "WaitVision.h"
 #include "DriveForward.h"
+//#include "../OI.h"
 
 AutonomousCommand::AutonomousCommand() {
+	
         // Add Commands here:
         // e.g. AddSequential(new Command1());
         //      AddSequential(new Command2());
@@ -29,19 +31,22 @@ AutonomousCommand::AutonomousCommand() {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
 	AddSequential(new WaitVision(5.0));
-	// AddSequential(new ShiftUp());
-//	AddSequential(new DriveDistanceCommand(-155, 1.0));
-#if 1
-	AddSequential(new DriveForward(0.6));
-//	AddParallel(new IntakeForwardBack2(false, 0.3));
-	AddSequential(new IntakeUpDown(false, 2.8));
-//	printf("Autonomous point 1\n");
-	//AddSequential(new ReleaseCatapultCommand2(
-		//	1.0, 
-			//.246
-//	));
-	printf("Autonomous Point 2\n");
-	//AddSequential(new ResetCatapultCommand());	
-//	printf("Autonomous Point 3\n");
-#endif
+	AddSequential(new DriveDistanceCommand(-20, 1.0));
+	
+	if (CommandBase::oi->getAutonomousCatapultState()== true) {
+		printf("AutonomousCommand::AutonomousCommand() - Catapult enabled on driver station\n");
+
+		printf("AutonomousCommand::AutonomousCommand() - schedule IntakeUpDown\n");
+		AddSequential(new IntakeUpDown(false, 2.8));
+
+		printf("AutonomousCommand::AutonomousCommand() - schedule ReleaseCatapultCommand2\n");
+		AddSequential(new ReleaseCatapultCommand2(
+			1.0, 
+			.248
+		));
+
+		printf("AutonomousCommand::AutonomousCommand() - schedule ResetCatapultCommand()\n");
+		AddSequential(new ResetCatapultCommand());	
+		
+	}
 }

@@ -26,6 +26,8 @@ class Robot : public IterativeRobot {
 public:
 	Command *autonomousCommand;
 	Command *teleopCommand;
+	
+	Robot();
 
 	virtual void RobotInit();
 	virtual void AutonomousInit();

@@ -9,17 +9,28 @@
 // it from being updated in th future.
 #include "Robot.h"
 
+Robot::Robot():
+	autonomousCommand(NULL),
+	teleopCommand(NULL)
+{
+	printf("Robot::Robot()\n");
+}
 
 void Robot::RobotInit() {
 	CommandBase::init();
 	// instantiate the command used for the autonomous periodS
-	autonomousCommand = new AutonomousCommand();
+	printf("Robot::RobotInit()\n");
 	teleopCommand = new DriveWithJoysticks();
-	
+}
+
+void Robot::AutonomousInit() {
+	printf("Robot::AutonomousInit()\n");
+	if (autonomousCommand != NULL) {
+		delete autonomousCommand;
+		autonomousCommand = NULL;
+	}
+
 	autonomousCommand = new AutonomousCommand();
-  }
-void Robot::AutonomousInit() {	
-	if (autonomousCommand != NULL)
 	autonomousCommand->Start();
 }
 	
@@ -36,7 +47,9 @@ void Robot::TeleopInit() {
 	// teleop starts running. If you want the autonomous to 
 	// continue until interrupted by another command, remove
 	// this line or comment it out.
-	autonomousCommand->Cancel();
+	if(autonomousCommand != NULL) {
+		autonomousCommand->Cancel();
+	}
 	teleopCommand->Start();
 }
 	

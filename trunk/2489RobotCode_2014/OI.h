@@ -66,7 +66,7 @@ public:
 	AutonomousVariant getAutonomousVariant();
 	float getCatapultSpeed();
 	float getCatapultDuration();
-	bool getReverseDirection();
+	bool getAutonomousCatapultState();
 	void printEncoderValues();
 	void printCrouch();
 	void printAngle();
