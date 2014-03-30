@@ -10,6 +10,7 @@
 #include "ShiftUp.h"
 #include "WaitVision.h"
 #include "DriveForward.h"
+#include "IntakeForwardBack.h"
 //#include "../OI.h"
 
 AutonomousCommand::AutonomousCommand() {
@@ -31,13 +32,14 @@ AutonomousCommand::AutonomousCommand() {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
 	AddSequential(new WaitVision(5.0));
-	AddSequential(new DriveDistanceCommand(-20, 1.0));
+	AddSequential(new DriveDistanceCommand(-150, 1.0));
 	
 	if (CommandBase::oi->getAutonomousCatapultState()== true) {
 		printf("AutonomousCommand::AutonomousCommand() - Catapult enabled on driver station\n");
 
 		printf("AutonomousCommand::AutonomousCommand() - schedule IntakeUpDown\n");
-		AddSequential(new IntakeUpDown(false, 2.8));
+		AddSequential(new IntakeUpDown(false, 0.1)); //2.8
+		AddSequential(new IntakeForwardBack(false, 2.7));
 
 		printf("AutonomousCommand::AutonomousCommand() - schedule ReleaseCatapultCommand2\n");
 		AddSequential(new ReleaseCatapultCommand2(

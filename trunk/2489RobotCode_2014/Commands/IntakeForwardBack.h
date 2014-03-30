@@ -10,7 +10,7 @@
  */
 class IntakeForwardBack: public CommandBase {
 private:
-	bool spit;
+	bool m_SpinOut;
 	float m_timeout;
 public:
 	IntakeForwardBack(bool, double);
