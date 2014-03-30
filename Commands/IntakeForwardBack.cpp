@@ -1,10 +1,10 @@
 #include "IntakeForwardBack.h"
 
-IntakeForwardBack::IntakeForwardBack(bool isSpit, double timeout) {
+IntakeForwardBack::IntakeForwardBack(bool isSpinOut, double timeout) {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
 	Requires(intake);
-	spit = isSpit;
+	m_SpinOut = isSpinOut;
 	m_timeout = timeout;
 }
 
@@ -17,7 +17,7 @@ void IntakeForwardBack::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void IntakeForwardBack::Execute() {
-	if(spit) {
+	if(m_SpinOut) {
 		intake->spitOut();
 	} else {
 		intake->suckIn();

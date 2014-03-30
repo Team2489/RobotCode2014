@@ -59,7 +59,7 @@
 #define CHASSIS_ENCODER_LEFT_PORT_2  	12
 
 // THis value was measured by driving the robot for 100".  
-#define ENCODER_PULSE_PER_INCH			14.37
+#define ENCODER_PULSE_PER_INCH			15.58
 
 //Analog 
 #define CHASSISGYROANALOG 1
