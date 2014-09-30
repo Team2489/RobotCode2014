@@ -4,7 +4,7 @@
 
 Intake::Intake() : Subsystem("Intake") {
 	m_intakeSolenoid1 = new DoubleSolenoid(INTAKE_SOLENOID1_LEFT_PORT,INTAKE_SOLENOID1_RIGHT_PORT);
-	m_intakeJaguar1 = new Jaguar(INTAKE_JAGUAR_PWM);
+	m_intakeJaguar1 = new Talon(INTAKE_TALON_PWM);
 	m_intakeSolenoid1->Set(DoubleSolenoid::kOff);
 }
     

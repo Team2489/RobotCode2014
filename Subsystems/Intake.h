@@ -14,7 +14,7 @@ private:
 	// for methods that implement subsystem capabilities
 public:
 	DoubleSolenoid* m_intakeSolenoid1;
-	Jaguar* m_intakeJaguar1;
+	Talon* m_intakeJaguar1;
 	Intake();
 	void InitDefaultCommand();
 	void down();
