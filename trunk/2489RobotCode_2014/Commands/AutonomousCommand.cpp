@@ -32,7 +32,7 @@ AutonomousCommand::AutonomousCommand() {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
 	AddSequential(new WaitVision(5.0));
-	AddSequential(new DriveDistanceCommand(-150, 1.0));
+	AddSequential(new DriveDistanceCommand(-10, 1.0));
 	
 	if (CommandBase::oi->getAutonomousCatapultState()== true) {
 		printf("AutonomousCommand::AutonomousCommand() - Catapult enabled on driver station\n");
