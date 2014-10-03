@@ -14,15 +14,21 @@ DriveDistanceCommand::DriveDistanceCommand(float distance, float power):
 // Called just before this Command runs the first time
 void DriveDistanceCommand::Initialize() {
 	printf("DriveDistanceCommand::Initialize()\n");
+	chassis->m_encoderRight->Reset();
+	chassis->m_encoderLeft->Reset();
 	
 	chassis->m_encoderRight->Start();
 	chassis->m_encoderLeft->Start();
+
 	m_InitialValueRight = chassis->m_encoderRight->Get();
 	m_InitialValueLeft = chassis->m_encoderLeft->Get();
 }
 
 // Called repeatedly when this Command is scheduled to run
 void DriveDistanceCommand::Execute() {
+	printf("%d\n", chassis->m_encoderRight->Get());
+	printf("%d\n", chassis->m_encoderLeft->Get());
+	
 	if(m_encoderTicksToTravel > 0) {
 		chassis->goStraight(m_power);
 	} else {
