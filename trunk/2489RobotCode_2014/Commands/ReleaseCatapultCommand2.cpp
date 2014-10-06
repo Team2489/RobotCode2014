@@ -45,10 +45,6 @@ void ReleaseCatapultCommand2::Initialize() {
 	m_TaskDone = false;
 	m_time = m_inputTime;
 	
-	if(intake->getSolenoid()){
-//		printf("TaskDone\n");
-		m_TaskDone = true;
-	}
 }
 
 // Called repeatedly when this Command is scheduled to run

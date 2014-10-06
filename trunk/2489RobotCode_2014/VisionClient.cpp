@@ -1,4 +1,5 @@
 #include "VisionClient.h"
+#include "RobotMap.h"
 #include <Timer.h>
 #include <iostream>
 
@@ -35,7 +36,7 @@ void VisionClient::Run(void)
 			if (debug) {
 				cout << "Client is reading." << endl;
 			}
-			client->Send(TCPClient::PULL);
+			client->Send((TCPClient::Request)htonl(vision_mode));
 			client->Receive(&direc);
 		}
 		else {

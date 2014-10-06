@@ -41,15 +41,16 @@ bool DriveDistanceCommand::IsFinished() {
 	int encoderTickRight = chassis->m_encoderRight->Get() - m_InitialValueRight;
 	int encoderTickLeft = chassis->m_encoderLeft->Get() - m_InitialValueLeft;
 	
-	bool leftDone;
-	bool rightDone;
+	bool leftDone = false;
+	bool rightDone = false;
+	
 	if (m_distance > 0){
 		leftDone = (encoderTickLeft >= m_encoderTicksToTravel);
-		rightDone = (encoderTickRight >= m_encoderTicksToTravel);	
+//		rightDone = (encoderTickRight >= m_encoderTicksToTravel);	
 	}
 	else {
 		leftDone = (encoderTickLeft <= m_encoderTicksToTravel);
-		rightDone = (encoderTickRight <= m_encoderTicksToTravel);
+//		rightDone = (encoderTickRight <= m_encoderTicksToTravel);
 	}
 	return (leftDone || rightDone);
 }
