@@ -2,13 +2,13 @@
 #include "ReleaseCatapultCommand.h"
 #include "ResetCatapultCommand.h"
 #include "../RobotMap.h"
-#include "IntakeForwardBack2.h"
+#include "IntakeForwardBack.h"
 #include "IntakeUpDown.h"
 
 ShootCloseCommandGroup::ShootCloseCommandGroup() {
     // these will run in order.
-	//AddParallel(new IntakeForwardBack2(false, 0.3));
-	AddSequential(new IntakeUpDown(false, 0.8));
+	AddSequential(new IntakeUpDown(false, 1.0)); //2.5
+	//AddSequential(new IntakeForwardBack(false, 1.4));
 	AddSequential(new ReleaseCatapultCommand(
 			SHOOT_CLOSE_COMMAND_POWER, 
 			SHOOT_CLOSE_COMMAND_DURATION

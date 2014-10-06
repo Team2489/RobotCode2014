@@ -13,7 +13,7 @@
 #include "IntakeForwardBack.h"
 //#include "../OI.h"
 
-AutonomousCommand::AutonomousCommand() {
+ AutonomousCommand::AutonomousCommand() {
 	
         // Add Commands here:
         // e.g. AddSequential(new Command1());
@@ -31,24 +31,26 @@ AutonomousCommand::AutonomousCommand() {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-	AddSequential(new WaitVision(5.0));
-	AddSequential(new DriveDistanceCommand(-10, 1.0));
+
+//	AddSequential(new WaitVision(5.0));
+	AddSequential(new DriveDistanceCommand(212, 0.75));
+	AddSequential(new IntakeForwardBack(true,0.2));
+	AddSequential(new DriveDistanceCommand(3, 0.6));
 	
 	if (CommandBase::oi->getAutonomousCatapultState()== true) {
 		printf("AutonomousCommand::AutonomousCommand() - Catapult enabled on driver station\n");
 
 		printf("AutonomousCommand::AutonomousCommand() - schedule IntakeUpDown\n");
-		AddSequential(new IntakeUpDown(false, 0.1)); //2.8
-		AddSequential(new IntakeForwardBack(false, 2.7));
+		AddSequential(new IntakeUpDown(false, 1.0)); //2.8
+		//AddSequential(new IntakeForwardBack(false, 2.7));
 
 		printf("AutonomousCommand::AutonomousCommand() - schedule ReleaseCatapultCommand2\n");
 		AddSequential(new ReleaseCatapultCommand2(
 			1.0, 
-			.248
+			.188
 		));
 
 		printf("AutonomousCommand::AutonomousCommand() - schedule ResetCatapultCommand()\n");
 		AddSequential(new ResetCatapultCommand());	
-		
 	}
 }

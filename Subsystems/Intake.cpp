@@ -27,6 +27,7 @@ void Intake::down() {
 
 void Intake::turnOff() {
 	m_intakeJaguar1->Set(0.0);
+//	printf("Should work\n");
 }
 void Intake::spitOut() {
 	m_intakeJaguar1->Set(1.0);

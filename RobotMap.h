@@ -23,7 +23,7 @@
 #define MODULE1NUM 1
 // Jaguars Talons and Motors
 #define CHASSISLEFTMOTORPWM 2
-#define CHASSISRIGHTMOTORPWM 1
+#define CHASSISRIGHTMOTORPWM 3
 
 //Catapult
 #define CATAPULT_MOTOR_1_PWM 5
@@ -34,7 +34,7 @@
 
 #define SHOOT_FOR_THE_GOAL_POWER 		1.00
 // this is a value for shooting from about 0 to 1 foot from the fender
-#define SHOOT_FOR_THE_GOAL_DURATION 	.248
+#define SHOOT_FOR_THE_GOAL_DURATION 	.212
 
 #define SHOOT_CLOSE_COMMAND_POWER 		1.00
 #define	SHOOT_CLOSE_COMMAND_DURATION	.188
@@ -45,7 +45,12 @@
 #define CATAPULT_RESET_POWER			0.15
 #define SHOOT_OVER_THE_TRUSS_POWER		1.00 //0.90
 // rely on the value from the dial on the driver station
-#define SHOOT_OVER_THE_TRUSS_DURATION 	0 
+#define SHOOT_OVER_THE_TRUSS_DURATION 	0.204 
+
+//Vision
+#define VISION_COLLECT_IMAGES_OFF 11
+#define VISION_COLLECT_IMAGES_ON 10
+extern int vision_mode;
 
 //Solenoids
 #define PUMPSPIKESOLENOID 1

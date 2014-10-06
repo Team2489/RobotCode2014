@@ -8,7 +8,7 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in th future.
 #include "Robot.h"
-
+int vision_mode = VISION_COLLECT_IMAGES_OFF;
 Robot::Robot():
 	autonomousCommand(NULL),
 	teleopCommand(NULL)
@@ -25,6 +25,7 @@ void Robot::RobotInit() {
 
 void Robot::AutonomousInit() {
 	printf("Robot::AutonomousInit()\n");
+	vision_mode = VISION_COLLECT_IMAGES_ON;
 	if (autonomousCommand != NULL) {
 		delete autonomousCommand;
 		autonomousCommand = NULL;
@@ -47,9 +48,11 @@ void Robot::TeleopInit() {
 	// teleop starts running. If you want the autonomous to 
 	// continue until interrupted by another command, remove
 	// this line or comment it out.
+	vision_mode = VISION_COLLECT_IMAGES_OFF;
 	if(autonomousCommand != NULL) {
 		autonomousCommand->Cancel();
 	}
+	
 	teleopCommand->Start();
 }
 	

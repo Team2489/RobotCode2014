@@ -112,8 +112,8 @@ OI::OI():
 	m_gameButton4->WhenPressed(new ShootBallIntoGoalGroup());
 	m_gameButton5->WhileHeld(new IntakeForwardBack(false, 0.2)); //rotate in
 	m_gameButton7->WhileHeld(new IntakeForwardBack(true, 0.2));  //rotate out
-	m_gameButton6->WhenPressed(new IntakeUpDown(true, 0.0));			//go in
-	m_gameButton8->WhenPressed(new IntakeUpDown(false, 0.0));		//go out
+	m_gameButton6->WhenPressed(new IntakeUpDown(true, 0.4));			//go in
+	m_gameButton8->WhenPressed(new IntakeUpDown(false, 0.4));		//go out
 	
 	m_leftTrigger->WhenPressed(new ShiftDown());
 	m_leftButton2->WhenPressed(new ReverseChassisDirectionControlCommand(true));

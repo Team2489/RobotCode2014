@@ -49,10 +49,6 @@ void ReleaseCatapultCommand::Initialize() {
 	if(m_time == 0) {
 		m_time = oi->getCatapultDuration();
 	}
-	if(intake->getSolenoid()){
-//		printf("TaskDone\n");
-		m_TaskDone = true;
-	}
 }
 
 // Called repeatedly when this Command is scheduled to run
